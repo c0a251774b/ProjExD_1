@@ -2,6 +2,8 @@ import os
 import sys
 import pygame as pg
 
+import random
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -15,18 +17,35 @@ def main():
 
     koukaton = pg.image.load("fig/3.png")
     koukaton = pg.transform.flip(koukaton, True, False)
+    koukaton_rct = koukaton.get_rect()
+    koukaton_rct.center = 300, 200
 
 
     while True:
-        x = -(tmr * 100 % 3200)
+        x = -(tmr % 3200)
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+
+        key_lst = pg.key.get_pressed()
 
         screen.blit(bg_img, [x, 0])
         screen.blit(f_bg_img, [x + 1600, 0])
         screen.blit(bg_img, [x + 3200, 0])
+
+        if key_lst[pg.K_UP]:
+            koukaton_rct.move_ip((0, -1))
+
+        if key_lst[pg.K_DOWN]:
+                    koukaton_rct.move_ip((0, 1))
+
+        if key_lst[pg.K_LEFT]:
+                    koukaton_rct.move_ip((-1, 0))
+
+        if key_lst[pg.K_RIGHT]:
+                    koukaton_rct.move_ip((1, 0))
+
         
-        screen.blit(koukaton, [300, 200])
+        screen.blit(koukaton, koukaton_rct)
         
         pg.display.update()
         tmr += 1        
