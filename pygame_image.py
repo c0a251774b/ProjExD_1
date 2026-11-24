@@ -23,6 +23,9 @@ def main():
 
     while True:
         x = -(tmr % 3200)
+
+        move = [0, 0]
+
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
@@ -33,19 +36,20 @@ def main():
         screen.blit(bg_img, [x + 3200, 0])
 
         if key_lst[pg.K_UP]:
-            koukaton_rct.move_ip((0, -1))
+            move[1] -= 1
 
         if key_lst[pg.K_DOWN]:
-                    koukaton_rct.move_ip((0, 1))
+            move[1] += 1
 
         if key_lst[pg.K_LEFT]:
-            koukaton_rct.move_ip((-1, 0))
+            move[0] -= 1
 
         if key_lst[pg.K_RIGHT]:
-                    koukaton_rct.move_ip((1, 0))
+            move[0] += 1
         else:
-            koukaton_rct.move_ip((-1, 0))
-        
+            move[0] -= 1
+
+        koukaton_rct.move_ip(move)
         screen.blit(koukaton, koukaton_rct)
         
         pg.display.update()
