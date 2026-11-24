@@ -39,11 +39,12 @@ def main():
                     koukaton_rct.move_ip((0, 1))
 
         if key_lst[pg.K_LEFT]:
-                    koukaton_rct.move_ip((-1, 0))
+            koukaton_rct.move_ip((-1, 0))
 
         if key_lst[pg.K_RIGHT]:
                     koukaton_rct.move_ip((1, 0))
-
+        else:
+            koukaton_rct.move_ip((-1, 0))
         
         screen.blit(koukaton, koukaton_rct)
         
